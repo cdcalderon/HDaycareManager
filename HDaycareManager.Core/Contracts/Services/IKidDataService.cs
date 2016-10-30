@@ -7,6 +7,6 @@ namespace HDaycareManager.Core.Contracts.Services
 {
 	public interface IKidDataService
 	{
-		Task<IEnumerable< Kid>> GetKids();
+		Task<List<Kid>> GetKids();
 	}
 }
