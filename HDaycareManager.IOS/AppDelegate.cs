@@ -1,4 +1,7 @@
 ﻿using Foundation;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Platform;
+using MvvmCross.Platform;
 using UIKit;
 
 namespace HDaycareManager.IOS
@@ -6,7 +9,7 @@ namespace HDaycareManager.IOS
 	// The UIApplicationDelegate for the application. This class is responsible for launching the
 	// User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
 	[Register("AppDelegate")]
-	public class AppDelegate : UIApplicationDelegate
+	public class AppDelegate : MvxApplicationDelegate
 	{
 		// class-level declarations
 
@@ -18,15 +21,26 @@ namespace HDaycareManager.IOS
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
-			// Override point for customization after application launch.
-			// If not required for your application you can safely delete this method
+			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-			// Code to start the Xamarin Test Cloud Agent
-#if ENABLE_TEST_CLOUD
-			Xamarin.Calabash.Start();
-#endif
+			var setup = new Setup(this, Window);
+			setup.Initialize();
+
+			var startup = Mvx.Resolve<IMvxAppStart>();
+			startup.Start();
+
+			// make the window visible
+			Window.MakeKeyAndVisible();
 
 			return true;
+
+
+			// Code to start the Xamarin Test Cloud Agent
+//#if ENABLE_TEST_CLOUD
+//			Xamarin.Calabash.Start();
+//#endif
+
+//			return true;
 		}
 
 		public override void OnResignActivation(UIApplication application)

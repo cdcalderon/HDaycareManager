@@ -41,16 +41,28 @@ namespace HDaycareManager.Core
 			}
 		}
 
+		public MvxCommand TestCommand
+		{ 
+			get {
+				return new MvxCommand(() => Test()); 
+			} 
+		}
+
+		private void Test()
+		{
+			var t = 1 + 3;
+		}
+
 		public override async void Start()
 		{
 			base.Start();
 			await ReloadDataAsync();
 		}
 
-		protected override async Task InitializeAsync()
-		{
-			//var user = _userDataService.GetActiveUser();
-			Kids = (await _kidDataService.GetKids()).ToObservableCollection();
-		}
+		//protected override async Task InitializeAsync()
+		//{
+		//	//var user = _userDataService.GetActiveUser();
+		//	Kids = (await _kidDataService.GetKids()).ToObservableCollection();
+		//}
 	}
 }
