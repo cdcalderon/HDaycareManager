@@ -11,8 +11,8 @@ using UIKit;
 
 namespace HDaycareManager.IOS
 {
-    [Register ("ViewController")]
-    partial class ViewController
+    [Register ("KidListViewController")]
+    partial class KidListViewController
     {
         void ReleaseDesignerOutlets ()
         {
